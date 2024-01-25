@@ -2,14 +2,15 @@ import React from 'react';
 import { Start } from './start';
 import { SignUp } from './sign-up';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { route } from '../constants';
 
 const router = createHashRouter([
   {
-    path: '/',
+    path: route.HOME,
     element: <Start />,
   },
   {
-    path: '/sign-up',
+    path: route.REGISTER,
     element: <SignUp />,
   },
 ]);

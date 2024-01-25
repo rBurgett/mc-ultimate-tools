@@ -4,12 +4,15 @@ import { DripstoneBlockCard } from './shared/card';
 import { useNavigate } from 'react-router-dom';
 import { Input } from './shared/input';
 import { BackButton } from './shared/back-button';
+import { DangerAlert } from './shared/alert';
+import swal from 'sweetalert';
 
 export const SignUp = () => {
 
   const [ email, setEmail ] = React.useState<string>('');
   const [ password, setPassword ] = React.useState<string>('');
   const [ passwordRepeat, setPasswordRepeat ] = React.useState<string>('');
+  const [ errorMessage, setErrorMessage ] = React.useState<string>('');
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -23,9 +26,17 @@ export const SignUp = () => {
     e.preventDefault();
     setPasswordRepeat(e.target.value);
   };
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('onSubmit');
+    if (!password.trim() || password !== passwordRepeat) {
+      setErrorMessage('Oops! Passwords do not match.');
+      return;
+    }
+    await swal({
+      title: 'Success!',
+      text: 'Account successfully created.',
+      icon: 'success',
+    });
   };
 
   return (
@@ -34,6 +45,40 @@ export const SignUp = () => {
       <DripstoneBlockCard>
         <h1 style={styles.heading} className={'text-center'}>Sign up!</h1>
         <form onSubmit={onSubmit}>
+
+          <Input
+            label={'Email'}
+            type={'email'}
+            placeholder={'Enter email address'}
+            value={email}
+            onChange={onEmailChange}
+            autoFocus={true}
+            required={true}
+          />
+
+          <Input
+            label={'Password'}
+            type={'password'}
+            placeholder={'Enter password'}
+            value={password}
+            onChange={onPasswordChange}
+            required={true}
+          />
+
+          <Input
+            label={'Repeat password'}
+            type={'password'}
+            placeholder={'Repeat password'}
+            value={passwordRepeat}
+            onChange={onPasswordRepeatChange}
+            required={true}
+          />
+
+          {errorMessage ?
+            <DangerAlert className={'mt-3 mb-0'}>{errorMessage}</DangerAlert>
+            :
+            null
+          }
 
           <button type={'submit'} className={'btn btn-secondary btn-lg mt-3 w-100'}>{'Create account!'}</button>
 
