@@ -1,0 +1,18 @@
+@import "./scss/bootstrap.scss";
+
+.dirt-bg {
+    background-image: url("./images/dirt.png");
+    background-repeat: repeat;
+}
+.stone-bg {
+    background-image: url("./images/stone.png");
+    background-repeat: repeat;
+}
+.coarse-dirt-bg {
+    background-image: url("./images/coarse_dirt.png");
+    background-repeat: repeat;
+}
+.dripstone-block-bg {
+    background-image: url("./images/dripstone_block.png");
+    background-repeat: repeat;
+}
