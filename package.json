@@ -47,7 +47,8 @@
     ]
   },
   "devDependencies": {
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "mime": "^3.0.0"
   },
   "license": "Apache-2.0"
 }
