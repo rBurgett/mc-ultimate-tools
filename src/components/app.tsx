@@ -1,23 +1,28 @@
 import React from 'react';
-import { Start } from './start';
 import { SignUp } from './sign-up';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { route } from '../constants';
+import { Login } from './login';
+import { Main } from './main';
 
 const router = createHashRouter([
   {
     path: route.HOME,
-    element: <Start />,
+    element: <Main />,
   },
   {
     path: route.REGISTER,
     element: <SignUp />,
   },
+  {
+    path: route.LOGIN,
+    element: <Login />,
+  },
 ]);
 
 export const App = () => {
   return (
-    <div style={styles.container as React.CSSProperties}>
+    <div className={'dirt-bg'} style={styles.container as React.CSSProperties}>
       <RouterProvider router={router} />
     </div>
   );

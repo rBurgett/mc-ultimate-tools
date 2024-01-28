@@ -4,6 +4,7 @@ import { App } from './components/app';
 import './index.scss';
 import './css/font-awesome.css';
 import { WindowSizeProvider } from './hooks/window-size-context';
+import { UserProvider } from './hooks/user-context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <WindowSizeProvider>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </WindowSizeProvider>
   </React.StrictMode>
 );

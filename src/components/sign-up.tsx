@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from './shared/container';
 import { DripstoneBlockCard } from './shared/card';
-import { useNavigate } from 'react-router-dom';
 import { Input } from './shared/input';
 import { BackButton } from './shared/back-button';
 import { DangerAlert } from './shared/alert';
@@ -40,7 +39,7 @@ export const SignUp = () => {
   };
 
   return (
-    <Container className={'dirt-bg'} style={styles.container as React.CSSProperties}>
+    <Container style={styles.container as React.CSSProperties}>
       <BackButton />
       <DripstoneBlockCard>
         <h1 style={styles.heading} className={'text-center'}>Sign up!</h1>

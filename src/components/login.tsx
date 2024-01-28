@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from './shared/container';
 import { DripstoneBlockCard } from './shared/card';
-import { useNavigate } from 'react-router-dom';
 import { Input } from './shared/input';
 import { BackButton } from './shared/back-button';
 import { DangerAlert } from './shared/alert';
-import swal from 'sweetalert';
+import { useLogin, useUser } from '../hooks/user-context';
+import { useNavigate } from 'react-router-dom';
+import { route } from '../constants';
 
 export const Login = () => {
 
+  const login = useLogin();
+  const user = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user.id || user.guest) {
+      navigate(route.HOME);
+    }
+  }, [user, navigate]);
+
   const [ email, setEmail ] = React.useState<string>('');
   const [ password, setPassword ] = React.useState<string>('');
-  const [ passwordRepeat, setPasswordRepeat ] = React.useState<string>('');
   const [ errorMessage, setErrorMessage ] = React.useState<string>('');
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,20 +32,21 @@ export const Login = () => {
     e.preventDefault();
     setPassword(e.target.value);
   };
-  const onPasswordRepeatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setPasswordRepeat(e.target.value);
-  };
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email.trim()) {
+      setErrorMessage('Oops! You must enter an email address.');
+      return;
+    }
     if (!password.trim()) {
       setErrorMessage('Oops! You must enter a password.');
       return;
     }
+    login(email.trim(), password);
   };
 
   return (
-    <Container className={'dirt-bg'} style={styles.container as React.CSSProperties}>
+    <Container style={styles.container as React.CSSProperties}>
       <BackButton />
       <DripstoneBlockCard>
 
